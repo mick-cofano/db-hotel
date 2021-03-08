@@ -1,0 +1,44 @@
+Esercizio db-hotel
+____________________________________________________________________________________
+●    Selezionare tutti gli ospiti
+	
+	SELECT * FROM `ospiti` WHERE 1
+
+____________________________________________________________________________________
+●    Selezionare tutti gli ospiti con document type = a CI
+
+	SELECT * FROM `ospiti`
+	WHERE `document_type` = "CI"
+
+____________________________________________________________________________________
+●    Selezionare i paganti che abbiano un ospite id associato
+
+	SELECT * FROM `paganti` 
+	WHERE `ospite_id` >= "1"
+
+____________________________________________________________________________________
+●    Selezionare tutte le stanze del primo piano
+
+	SELECT * FROM `stanze` 
+	WHERE `floor` = "1"
+
+____________________________________________________________________________________
+●    Selezionare tutti gli ospiti che iniziano per E
+
+	SELECT * FROM `ospiti` 
+	WHERE `name` LIKE 'a%'
+
+____________________________________________________________________________________
+●    Selezionare tutti gli ospiti che abbiano meno di 30 anni
+
+	SELECT * FROM `ospiti` 
+	WHERE `date_of_birth` >= "1991-03-10"
+
+
+____________________________________________________________________________________
+●    Seleziona tutte le prenotazioni precedenti a maggio 2018
+
+	SELECT * FROM `prenotazioni` 
+	WHERE `created_at` < "2018-05-01"
+
+____________________________________________________________________________________
