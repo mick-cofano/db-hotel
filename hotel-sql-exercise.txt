@@ -42,3 +42,115 @@ ________________________________________________________________________________
 	WHERE `created_at` < "2018-05-01"
 
 ____________________________________________________________________________________
+●    Seleziona tutti gli ospiti che sono stati identificati con la carta di identità
+
+	SELECT * 
+	FROM `ospiti` 
+	WHERE `document_type` = "CI"
+
+____________________________________________________________________________________
+●    Seleziona tutti gli ospiti che sono nati dopo il 1988
+
+	SELECT * 
+	FROM `ospiti` 
+	WHERE `date_of_birth` > "1988-01-01"
+
+____________________________________________________________________________________
+●    Seleziona tutti gli ospiti che hanno più di 20 anni (al momento dell’esecuzione della query)
+
+	SELECT * 
+	FROM `ospiti` 
+	WHERE TIMESTAMPDIFF (YEAR,`date_of_birth`, CURRENT_TIMESTAMP ) > 20;
+
+____________________________________________________________________________________
+●    Seleziona tutti gli ospiti il cui nome inizia con la D
+
+	SELECT * 
+	FROM `ospiti` 
+	WHERE `name` LIKE "D%"
+
+____________________________________________________________________________________
+●    Calcola il totale degli ordini accepted
+
+	SELECT SUM(price) , status
+	FROM `pagamenti` 
+	WHERE `status` = "accepted"
+
+____________________________________________________________________________________
+●    Qual è il prezzo massimo pagato?
+
+	SELECT MAX(price)
+	AS LargestPrice
+	FROM pagamenti
+
+____________________________________________________________________________________
+●    Seleziona gli ospiti riconosciuti con patente e nati nel 1975
+
+	SELECT * 
+	FROM `ospiti` 
+	WHERE `document_type` = "Driver License"
+	AND `date_of_birth` = "1975"
+
+____________________________________________________________________________________
+●    Quanti paganti sono anche ospiti?
+
+	SELECT * 
+	FROM `paganti` 
+	WHERE `ospite_id` IS NOT NULL
+
+____________________________________________________________________________________
+●    Quanti posti letto ha l’hotel in totale?
+
+	SELECT COUNT(*), beds
+	FROM `stanze`
+	GROUP BY `beds`
+
+____________________________________________________________________________________
+
+GROUP BY -----------------------------------------------------------
+
+____________________________________________________________________________________
+
+●    Conta gli ospiti raggruppandoli per anno di nascita
+
+	SELECT COUNT(`id`), date_of_birth
+	FROM `ospiti`
+	GROUP BY date_of_birth
+
+____________________________________________________________________________________
+
+●    Somma i prezzi dei pagamenti raggruppandoli per status
+
+	SELECT SUM(price) , status
+	FROM `pagamenti` 
+	GROUP BY `status`
+
+____________________________________________________________________________________
+
+●    Conta quante volte è stata prenotata ogni stanza
+
+	SELECT COUNT(`stanza_id`) 
+	AS num_prenotazioni,`stanza_id`
+	FROM `prenotazioni`
+	GROUP BY `stanza_id`
+
+____________________________________________________________________________________
+
+●    Fai una analisi per vedere se ci sono ore in cui le prenotazioni sono più frequenti
+
+____________________________________________________________________________________
+
+●    Quante prenotazioni ha fatto l’ospite che ha fatto più prenotazioni?
+
+      SELECT COUNT(`prenotazione_id`),`ospite_id`
+      FROM prenotazioni_has_ospiti
+      GROUP BY `ospite_id`
+      ORDER BY COUNT(`id`) DESC
+
+____________________________________________________________________________________
+
+JOIN --------------------------------------------------------------------
+
+____________________________________________________________________________________
+
+●    Come si chiamano gli ospiti che hanno fatto più di due prenotazioni?
